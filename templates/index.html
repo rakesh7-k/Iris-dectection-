@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Header -->
+<header class="bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-center space-x-3">
+            <i data-lucide="flower" class="h-10 w-10"></i>
+            <div class="text-center">
+                <h1 class="text-4xl font-bold">Iris Flower Predictor</h1>
+                <p class="text-lg opacity-90 mt-2">
+                    AI-powered species classification using machine learning
+                </p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container mx-auto px-4 py-12 space-y-12">
+    <!-- Introduction -->
+    <div class="text-center max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">
+            Discover the Beauty of Machine Learning
+        </h2>
+        <p class="text-lg text-gray-600 leading-relaxed">
+            Enter the measurements of an iris flower and watch our AI model predict its species 
+            using the famous Iris dataset. Experience the power of classification algorithms in action.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Prediction Form -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+            <div class="flex items-center space-x-3 mb-6">
+                <i data-lucide="calculator" class="h-6 w-6 text-blue-600"></i>
+                <h2 class="text-2xl font-bold text-gray-800">Make a Prediction</h2>
+            </div>
+
+            <form id="predictionForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">
+                            Sepal Length (cm)
+                        </label>
+                        <input
+                            type="number"
+                            step="0.1"
+                            min="0"
+                            max="10"
+                            value="5.1"
+                            id="sepal_length"
+                            class="w-full px-4 py-3 border-2 border-emerald-200 rounded-xl bg-gradient-to-r from-emerald-50 to-green-50 focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition-all duration-300 hover:border-emerald-300 text-gray-800 font-medium"
+                            required
+                        />
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">
+                            Sepal Width (cm)
+                        </label>
+                        <input
+                            type="number"
+                            step="0.1"
+                            min="0"
+                            max="10"
+                            value="3.5"
+                            id="sepal_width"
+                            class="w-full px-4 py-3 border-2 border-blue-200 rounded-xl bg-gradient-to-r from-blue-50 to-cyan-50 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition-all duration-300 hover:border-blue-300 text-gray-800 font-medium"
+                            required
+                        />
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">
+                            Petal Length (cm)
+                        </label>
+                        <input
+                            type="number"
+                            step="0.1"
+                            min="0"
+                            max="10"
+                            value="1.4"
+                            id="petal_length"
+                            class="w-full px-4 py-3 border-2 border-purple-200 rounded-xl bg-gradient-to-r from-purple-50 to-violet-50 focus:ring-2 focus:ring-purple-400 focus:border-purple-400 transition-all duration-300 hover:border-purple-300 text-gray-800 font-medium"
+                            required
+                        />
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-gray-700">
+                            Petal Width (cm)
+                        </label>
+                        <input
+                            type="number"
+                            step="0.1"
+                            min="0"
+                            max="10"
+                            value="0.2"
+                            id="petal_width"
+                            class="w-full px-4 py-3 border-2 border-rose-200 rounded-xl bg-gradient-to-r from-rose-50 to-pink-50 focus:ring-2 focus:ring-rose-400 focus:border-rose-400 transition-all duration-300 hover:border-rose-300 text-gray-800 font-medium"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <button
+                    type="submit"
+                    id="predictBtn"
+                    class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                >
+                    <i data-lucide="sparkles" class="h-5 w-5"></i>
+                    <span>Predict Species</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Prediction Result -->
+        <div id="resultContainer" class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 hidden">
+            <!-- Result content will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Data Visualization -->
+    <div id="dataVisualization" class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+        <!-- Visualization content will be populated by JavaScript -->
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="space-y-4">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="brain" class="h-6 w-6 text-blue-400"></i>
+                    <h3 class="text-lg font-semibold">Machine Learning</h3>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    This predictor uses the K-Nearest Neighbors algorithm to classify iris flowers based on their measurements.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="text-lg font-semibold">Features</h3>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li>• Real-time prediction</li>
+                    <li>• Interactive data visualization</li>
+                    <li>• Confidence scoring</li>
+                    <li>• Responsive design</li>
+                </ul>
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="text-lg font-semibold">About</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Built with Flask, Python, and Tailwind CSS. The classic Iris dataset by Ronald Fisher.
+                </p>
+                <div class="flex items-center space-x-2 text-sm text-gray-400">
+                    <i data-lucide="heart" class="h-4 w-4 text-red-400"></i>
+                    <span>Made with passion for ML</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+            <p class="text-gray-400 text-sm">
+                © 2025 Iris Flower Predictor. Educational machine learning demonstration.
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}
